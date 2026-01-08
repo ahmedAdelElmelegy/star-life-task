@@ -83,7 +83,7 @@ Login is considered **failed** when:
 
   * Flutter authentication flows
   * Bloc / Cubit testing
-  * Clean Architecture projects
+  * MVVM Architecture projects
 
 ---
 
@@ -102,6 +102,9 @@ Login is considered **failed** when:
 * Bloc / Cubit
 * GetIt
 * Fake REST API
+* ScreenUtil
+* pretty_dio_logger
+* shared_preferences
 
 ---
 
