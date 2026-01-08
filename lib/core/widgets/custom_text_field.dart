@@ -5,7 +5,13 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
+  final bool isObscure;
+  final Widget? suffixIcon;
+  final TextInputAction? textInputAction;
   const CustomTextField({
+    this.isObscure = false,
+    this.suffixIcon,
+    this.textInputAction,
     super.key,
     required this.hintText,
     this.validator,
@@ -17,9 +23,11 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       validator: validator,
-
+      textInputAction: textInputAction,
+      obscureText: isObscure,
       decoration: InputDecoration(
         hintText: hintText,
+        suffixIcon: suffixIcon,
         border: outlineBorder(color: Colors.grey),
         enabledBorder: outlineBorder(color: Colors.grey),
         focusedBorder: outlineBorder(color: Colors.blue),

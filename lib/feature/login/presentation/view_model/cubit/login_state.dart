@@ -13,3 +13,5 @@ final class LoginError extends LoginState {
   final String message;
   LoginError(this.message);
 }
+
+final class LoginObscure extends LoginState {}

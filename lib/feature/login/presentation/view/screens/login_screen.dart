@@ -64,10 +64,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: 'Email',
                     validator: (email) => Validator.isValidEmail(email),
                     controller: emailController,
+                    textInputAction: TextInputAction.next,
                   ),
                   verticalSpace(16),
                   CustomTextField(
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        logincubit.toggleObscure();
+                      },
+                      child: logincubit.isObscure
+                          ? Icon(Icons.visibility)
+                          : Icon(Icons.visibility_off),
+                    ),
+                    isObscure: logincubit.isObscure,
                     hintText: 'Password',
+                    textInputAction: TextInputAction.done,
                     validator: (password) =>
                         Validator.isValidPassword(password),
                     controller: passwordController,

@@ -8,10 +8,11 @@ import 'package:starlife_task/feature/login/data/repo/login_repo.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit(this.loginRepo) : super(LoginInitial()) {}
+  LoginCubit(this.loginRepo) : super(LoginInitial());
 
   LoginRepo loginRepo;
   LoginModel? loginModel;
+  bool isObscure = true;
 
   Future<ApiResponse> login({
     required LoginRequestBody loginRequestBody,
@@ -30,5 +31,11 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginError(response.error!.message));
     }
     return response;
+  }
+
+  // toggle obscure
+  void toggleObscure() {
+    isObscure = !isObscure;
+    emit(LoginObscure());
   }
 }
