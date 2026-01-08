@@ -1,16 +1,108 @@
-# starlife_task
+# 🔐 Fake Login API (Status Code **201 Only**)
 
-A new Flutter project.
+This project uses a **fake authentication API** for testing login functionality using **email and password**.
 
-## Getting Started
+⚠️ **Important Rule**
+The login process is considered **successful ONLY if the API response status code is `201`**.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 🌐 API Endpoint
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```
+POST https://api.escuelajs.co/api/v1/auth/login
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 📥 Request Body
+
+```json
+{
+  "email": "john@mail.com",
+  "password": "changeme"
+}
+```
+
+---
+
+## ✅ Success Condition
+
+The login request is treated as **successful** only when:
+
+* HTTP Status Code is **201**
+* Response body is not null
+
+### Example Success Response
+
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+✔ When status code is **201**, the application:
+
+* Parses the response data
+* Stores authentication tokens if needed
+* Emits **LoginSuccess** state
+
+---
+
+## ❌ Failure Condition
+
+Login is considered **failed** when:
+
+* Status code is **NOT 201**
+* OR response body is null
+* OR API returns an error
+
+### Example Error Response
+
+```json
+{
+  "statusCode": 401,
+  "message": "Unauthorized"
+}
+```
+
+❌ In this case:
+
+* Login request fails
+* Error message is shown to the user
+* **LoginError** state is emitted
+
+---
+
+## 🧠 Notes
+
+* This API is intended for **testing and development purposes only**
+* Status code `201` is enforced intentionally to simulate strict backend validation
+* Useful for:
+
+  * Flutter authentication flows
+  * Bloc / Cubit testing
+  * Clean Architecture projects
+
+---
+
+## 🛠 Test Credentials
+
+| Email                                 | Password |
+| ------------------------------------- | -------- |
+| [john@mail.com](mailto:john@mail.com) | changeme |
+
+---
+
+## 📌 Example Tech Stack
+
+* Flutter
+* Dio
+* Bloc / Cubit
+* GetIt
+* Fake REST API
+
+---
+
+If you are using this API in a Flutter project, make sure your login logic explicitly checks for **status code 201** before treating the request as successful.
